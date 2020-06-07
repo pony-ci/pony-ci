@@ -1,9 +1,12 @@
 import React from "react";
-import NavBar from "./NavBar";
+import NavBar from "../components/NavBar";
 
 function Docs() {
     return (
-        <NavBar/>
+        <div>
+            <NavBar/>
+            <div className="title">SFDX Plugin</div>
+        </div>
     )
 }
 
