@@ -5,6 +5,9 @@ manage data export/import
 and get rid of custom script files 
 using simple configuration file and sfdx plugin
 
+## Table of Contents
+- [Table of Contents](#table-of-contents)
+- [Links](#links)
 - [Project Structure](#project-structure)
 - [Jobs Configuration](#jobs-configuration)
     - [Steps Overview](#steps-overview)
@@ -13,6 +16,11 @@ using simple configuration file and sfdx plugin
 - [Data Management](#data-management)
     - [Data Export](#data-export)
     - [Data Import](#data-import)
+    
+## Links
+- [Docs](https://pony-ci.github.io/pony-ci)
+- [Plugin Repository](https://github.com/pony-ci/sfdx-plugin)
+- [Plugin Issues](https://github.com/pony-ci/sfdx-plugin/issues)
 
 ## Project Structure
 The core config file for pony projects is `.pony/config.yml`.
