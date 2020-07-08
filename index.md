@@ -1,9 +1,9 @@
-
 # Pony Project
 Define jobs to automate your Salesforce development experience.
-Automate scratch org creation, data export/import 
-and other using simple configuration file and sfdx plugin
-to get rid of custom script files. 
+Simplify scratch org creation,
+manage data export/import 
+and get rid of custom script files 
+using simple configuration file and sfdx plugin
 
 ## Project Structure
 The core config file for pony projects is `.pony/config.yml`.
@@ -45,6 +45,7 @@ these two jobs are executed before and after the `sfdx pony:org:create` command.
 
 There are five types of steps: 'echo', 'env', 'job', 'run' and 'sfdx'.
 
+### Steps Overview
 | type | example                           | description                   |
 |------|-----------------------------------|-------------------------------|
 | echo | `echo: running echo step`         | print to standard output      |
@@ -53,20 +54,21 @@ There are five types of steps: 'echo', 'env', 'job', 'run' and 'sfdx'.
 | run  | `npx eslint yourfile.js`          | execute shell                 |
 | sfdx | `sfdx: force:org:list`            | shortcut for `run: sfdx`      |
 
-In the example you can see defined three jobs and one replacement.
+### Job example
+In the example bellow you can see defined three jobs and one replacement.
 To create a scratch org execute `sfdx pony:org:create` command. 
-Before a scratch org is created the command will look for `pony:preOrgCreate` job.
-In the example there is a `pony:postOrgCreate` job which is executed after org creation.
+During scratch org creation you can implement two extensions, `pony:preOrgCreate` and `pony:preOrgCreate`.
+There is  a `pony:postOrgCreate` job which is executed after org creation.
 You can see most of the steps use `-u $env.username`, this is a pony syntax for global environment.
 The `username` and `devhubusername` variables are populated whenever an org is created, 
 so you don't have to rely on the sfdx default username.
-The first steps simply print login url (can be used in CI system to log in)
+The first steps simply print a login url (can be used in CI system to log in)
 and install first gen packages defined in `data/groups/packages.json`.
 
 The third step is more complicated. You can see that the source is pushed via `pony:source:push` 
 and not through the standard `force` command.
-Before a push is executed a `pony:preSourcePush` job 
-which runs `sfdx: pony:source:content:replace -r preSourcePush` command.
+Before a push is executed, the `pony:preSourcePush` job starts and
+runs `sfdx: pony:source:content:replace -r preSourcePush` command.
 The `preSourcePush` is a name of a replacement and is defined right after jobs.
 You can use replacements as a workaround for example when your source includes usernames 
 that are not replaced automatically with admin username by `force:source:push`.
@@ -113,6 +115,26 @@ replacements:
             replacement: $env.username
 ```
 
+## Packages
+Pony currently handles installation of first gen packages.
+
+You can find first gen packages in the file `data/groups/packages.json`.
+This file is a simple json which maps a name of a package group to 
+a list of package definitions. 
+Each package definition has to include at least `SubscriberPackageName` and `SubscriberPackageVersionId`.
+If you have some org with all packages installed, use `sfdx pony:package:group:export` to create this file.
+This command automatically removes standard packages, 
+please open an [issue](https://github.com/pony-ci/sfdx-plugin/issues) if some standard package is not removed.
+```json
+{
+    "default": [
+        {
+            "SubscriberPackageName": "Package Name",
+            "SubscriberPackageVersionId": "04t..."
+        }       
+    ]
+}
+``` 
 
 ## Data Management
 The `force:data:tree` is a great tool if you want to export/import records
