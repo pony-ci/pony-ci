@@ -6,7 +6,6 @@ and get rid of custom script files
 using simple configuration file and sfdx plugin
 
 ## Table of Contents
-- [Table of Contents](#table-of-contents)
 - [Links](#links)
 - [Project Structure](#project-structure)
 - [Jobs Configuration](#jobs-configuration)
