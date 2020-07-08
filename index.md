@@ -6,15 +6,15 @@ and get rid of custom script files
 using simple configuration file and sfdx plugin
 
 ## Table of Contents
-1) [Links](#links)
-1) [Project Structure](#project-structure)
-1) [Jobs Configuration](#jobs-configuration)
-    1) [Steps Overview](#steps-overview)
-    1) [Job Example](#job-example)
-1) [Packages](#packages)
-1) [Data Management](#data-management)
-    1) [Data Export](#data-export)
-    1) [Data Import](#data-import)
+- [Links](#links)
+- [Project Structure](#project-structure)
+- [Jobs Configuration](#jobs-configuration)
+    - [Steps Overview](#steps-overview)
+    - [Job Example](#job-example)
+- [Packages](#packages)
+- [Data Management](#data-management)
+    - [Data Export](#data-export)
+    - [Data Import](#data-import)
     
 ## Links
 - [Docs](https://pony-ci.github.io/pony-ci)
