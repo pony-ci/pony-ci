@@ -5,6 +5,15 @@ manage data export/import
 and get rid of custom script files 
 using simple configuration file and sfdx plugin
 
+- [Project Structure](#project-structure)
+- [Jobs Configuration](#jobs-configuration)
+    - [Steps Overview](#steps-overview)
+    - [Job Example](#job-example)
+- [Packages](#packages)
+- [Data Management](#data-management)
+    - [Data Export](#data-export)
+    - [Data Import](#data-import)
+
 ## Project Structure
 The core config file for pony projects is `.pony/config.yml`.
 This file includes job definitions, source replacements and data export/import configuration.
