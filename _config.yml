@@ -12,14 +12,14 @@ github:
 exclude: ['README.md']
 
 # Set the default `highlighter` mechanism to `Rouge`
-highlighter: "rouge"
+highlighter: rouge
 #
 # Set the default `markdown` engine to `Kramdown`
-markdown: "kramdown"
+markdown: kramdown
 #
 # Set the properties for `Kramdown`
 kramdown:
-    input: "GFM"
+    input: GFM
     syntax_highlighter: rouge
-    math_engine: "mathjax"
-    hard_wrap: "false"
+    math_engine: mathjax
+    hard_wrap: false
