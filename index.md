@@ -63,6 +63,7 @@ There are five types of steps: 'echo', 'env', 'job', 'run' and 'sfdx'.
 
 ### Steps Overview
 
+
 | type | example                           | description                   |
 |------|-----------------------------------|-------------------------------|
 | echo | `echo: running echo step`         | print to standard output      |
