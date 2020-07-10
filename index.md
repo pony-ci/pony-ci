@@ -8,8 +8,10 @@ using simple configuration file and sfdx plugin
 ## Table of Contents
 - [Links](#links)
 - [Project Structure](#project-structure)
-- [Jobs Configuration](#jobs-configuration)
+- [Jobs](#jobs)
     - [Steps Overview](#steps-overview)
+    - [Environment](#environment)
+    - [Source Replacement](#source-replacement)
     - [Job Example](#job-example)
 - [Packages](#packages)
 - [Data Management](#data-management)
@@ -53,7 +55,7 @@ Directories `data/` and `scripts/` contains files essential for creation of full
 
 ```
 
-## Jobs configuration
+## Jobs
 Job is a collection of steps.
 You can define your own job which can be executed from another job or using `sfdx pony:run`.
 Standard job extensions are prefixed with `pony`, e.g. `pony:preOrgCreate` and `pony:postSourcePush`,
@@ -67,39 +69,61 @@ There are five types of steps: 'echo', 'env', 'job', 'run' and 'sfdx'.
 | type | example                           | description                   |
 |------|-----------------------------------|-------------------------------|
 | echo | `echo: running echo step`         | print to standard output      |
-| env  | `env: myUsername=user@domain.com` | set pony environment variable |
+| env  | `env: myVariable=myValue` | set pony environment variable |
 | job  | `job: createTestUsers`            | execute job                   |
 | run  | `npx eslint yourfile.js`          | execute shell                 |
 | sfdx | `sfdx: force:org:list`            | shortcut for `run: sfdx`      |
 
-### Job example
-In the example bellow you can see defined three jobs and one replacement.
-To create a scratch org execute `sfdx pony:org:create` command. 
-During scratch org creation you can implement two extensions, `pony:preOrgCreate` and `pony:preOrgCreate`.
-There is  a `pony:postOrgCreate` job which is executed after org creation.
-You can see most of the steps use `-u $env.username`, this is a pony syntax for global environment.
-The `username` and `devhubusername` variables are populated whenever an org is created, 
-so you don't have to rely on the sfdx default username.
-The first steps simply print a login url (can be used in CI system to log in)
-and install first gen packages defined in `data/groups/packages.json`.
+### Environment
+Jobs executed in one context share environment.
+Set environment variable using the `env` step, e.g. `env: myVariable=myValue`,
+and get access variable using `$env.myVariable` notation.
+Some variables are set from commands, 
+you can find which variables are set in each command documentation.
+Most used variable you will use is a `username` variable
+and is set in the `pony:org:create` command.
 
-The third step is more complicated. You can see that the source is pushed via `pony:source:push` 
-and not through the standard `force` command.
-Before a push is executed, the `pony:preSourcePush` job starts and
-runs `sfdx: pony:source:content:replace -r preSourcePush` command.
-The `preSourcePush` is a name of a replacement and is defined right after jobs.
+### Source Replacement
 You can use replacements as a workaround for example when your source includes usernames 
 that are not replaced automatically with admin username by `force:source:push`.
-This replacement looks for inner texts in specified XML source files.
+Each replacement has its name.
+The replacement defined in [job example](#job-example) 
+looks for inner texts in specified XML source files.
 It searches for the specified search texts and replaces them with admin username using pony environment.
-After the source is pushed, the content of these files is reverted.
+
+If the replacement runs in the `pony:preSourcePush` extension,
+after the source is pushed, the content of these files is reverted.
 Moreover, if the push is successful, 
 the source path infos hashes are updated, so the files are not pushed again.
 Now you can use the standard `force:source:push` command.
-Note that you will again need to use the `pony:source:push` if you modify these files locally.
+Note that you will again need to use the `pony:source:push`
+if you modify one of these files locally.
 
-Next you can insert custom settings if any, import currency, import data 
-(more about export/import in Data Management chapter), create test users and many others.
+
+| type                | description                                                                                      |
+|---------------------|--------------------------------------------------------------------------------------------------|
+| innerText           | replace matched inner text with predefined value                                                 |
+| orgWideEmailAddress | replace `senderType` `OrgWideEmailAddress` value, remove `senderAddress` node                    |
+
+### Job example
+In the example bellow you can see defined three jobs and one replacement named `preSourcePush`.
+
+1. Run the `pony:org:create` command to create a scratch org.  
+Note that if you have default username set or provide `targetusername` flag,
+no scratch org is created, the `username` env is set 
+and the `pony:postOrgCreate` extension is executed immediately.
+2. The `pony:postOrgCreate` extension is executed.  
+2.1. Print a login url - can be used in CI system.  
+2.2. Install First Gen packages.  
+2.3. Execute `pony:source:push`.  
+2.4. Execute `pony:preSourcePush` extension.
+This extension executes [source replacement](#source-replacement).  
+2.5. Source is pushed.  
+2.6. Revert changed files, update source path info hashes.  
+2.7. Execute Apex script, insert custom settings or execute some configuration in Apex. 
+2.8. Import currency types.  
+2.9. Execute custom job `createTestUsers`.  
+2.10. List orgs.  
 
 ```yaml
 jobs:
@@ -131,6 +155,10 @@ replacements:
                 - some@username.com
                 - another@username.com
             replacement: $env.username
+        orgWideEmailAddress:
+            files:
+                - force-app/main/default/workflows/Case.workflow-meta.xml
+            replacement: CurrentUser
 ```
 
 ## Packages
