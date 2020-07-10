@@ -61,7 +61,7 @@ You can define your own job which can be executed from another job or using `sfd
 Standard job extensions are prefixed with `pony`, e.g. `pony:preOrgCreate` and `pony:postSourcePush`,
 these two jobs are executed before and after the `sfdx pony:org:create` command. 
 
-There are five types of steps: 'echo', 'env', 'job', 'run' and 'sfdx'.
+There are five types of steps: `echo`, `env`, `job`, `run` and `sfdx`.
 
 ### Steps Overview
 
