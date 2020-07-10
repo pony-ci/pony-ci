@@ -11,8 +11,8 @@ using simple configuration file and sfdx plugin
 - [Jobs](#jobs)
     - [Steps Overview](#steps-overview)
     - [Environment](#environment)
-    - [Source Replacement](#source-replacement)
     - [Job Example](#job-example)
+- [Source Replacement](#source-replacement)
 - [Packages](#packages)
 - [Data Management](#data-management)
     - [Data Export](#data-export)
@@ -83,28 +83,6 @@ you can find which variables are set in each command documentation.
 Most used variable you will use is a `username` variable
 and is set in the `pony:org:create` command.
 
-### Source Replacement
-You can use replacements as a workaround for example when your source includes usernames 
-that are not replaced automatically with admin username by `force:source:push`.
-Each replacement has its name.
-The replacement defined in [job example](#job-example) 
-looks for inner texts in specified XML source files.
-It searches for the specified search texts and replaces them with admin username using pony environment.
-
-If the replacement runs in the `pony:preSourcePush` extension,
-after the source is pushed, the content of these files is reverted.
-Moreover, if the push is successful, 
-the source path infos hashes are updated, so the files are not pushed again.
-Now you can use the standard `force:source:push` command.
-Note that you will again need to use the `pony:source:push`
-if you modify one of these files locally.
-
-
-| type                | description                                                                                      |
-|---------------------|--------------------------------------------------------------------------------------------------|
-| innerText           | replace matched inner text with predefined value                                                 |
-| orgWideEmailAddress | replace `senderType` `OrgWideEmailAddress` value, remove `senderAddress` node                    |
-
 ### Job example
 In the example bellow you can see defined three jobs and one replacement named `preSourcePush`.
 
@@ -160,6 +138,29 @@ replacements:
                 - force-app/main/default/workflows/Case.workflow-meta.xml
             replacement: CurrentUser
 ```
+
+## Source Replacement
+You can use replacements as a workaround for example when your source includes usernames 
+that are not replaced automatically with admin username by `force:source:push`.
+Each replacement has its name.
+The replacement defined in [job example](#job-example) 
+looks for inner texts in specified XML source files.
+It searches for the specified search texts and replaces them with admin username using pony environment.
+
+If the replacement runs in the `pony:preSourcePush` extension,
+after the source is pushed, the content of these files is reverted.
+Moreover, if the push is successful, 
+the source path infos hashes are updated, so the files are not pushed again.
+Now you can use the standard `force:source:push` command.
+Note that you will again need to use the `pony:source:push`
+if you modify one of these files locally.
+
+
+| type                | description                                                                                      |
+|---------------------|--------------------------------------------------------------------------------------------------|
+| innerText           | replace matched inner text with predefined value                                                 |
+| orgWideEmailAddress | replace `senderType` `OrgWideEmailAddress` value, remove `senderAddress` node                    |
+
 
 ## Packages
 Pony currently handles installation of first gen packages.
