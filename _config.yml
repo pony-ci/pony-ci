@@ -5,6 +5,7 @@ encoding: UTF-8
 title: "Pony CI"
 
 url: "https://github.com/pony-ci-docs"
+docs_url: "https://pony-ci.github.io/pony-ci-docs/"
 
 github:
     repository_url: https://github.com/pony-ci/sfdx-plugin
