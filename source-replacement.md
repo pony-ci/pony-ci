@@ -7,7 +7,7 @@ description: "Define source modifications."
 You can use replacements as a workaround for example when your source includes usernames 
 that are not replaced automatically with admin username by `force:source:push`.
 Each replacement has its name.
-The replacement defined in [job example](pages/jobs.md#job-example) 
+The replacement defined in [job example](./jobs#job-example) 
 looks for inner texts in specified XML source files.
 It searches for the specified search texts and replaces them with admin username using pony environment.
 
