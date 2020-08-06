@@ -2,9 +2,9 @@ theme: jekyll-theme-cayman
 
 lang: "en-US"
 encoding: UTF-8
-title: PonyCI
+title: "Pony CI"
 
-url: "https://github.com/pony-ci"
+url: "https://github.com/pony-ci-docs"
 
 github:
     repository_url: https://github.com/pony-ci/sfdx-plugin
