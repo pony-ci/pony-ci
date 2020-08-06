@@ -3,6 +3,7 @@ theme: jekyll-theme-cayman
 lang: "en-US"
 encoding: UTF-8
 title: "Pony CI"
+description: "Automate you sfdx app lifecycle."
 
 url: "https://github.com/pony-ci-docs"
 
