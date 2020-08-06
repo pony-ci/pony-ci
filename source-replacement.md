@@ -4,7 +4,6 @@ title: "Source Replacement"
 description: "Define source modifications."
 ---
 
-# Source Replacement
 You can use replacements as a workaround for example when your source includes usernames 
 that are not replaced automatically with admin username by `force:source:push`.
 Each replacement has its name.

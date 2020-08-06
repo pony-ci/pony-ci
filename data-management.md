@@ -4,7 +4,6 @@ title: "Data Management"
 description: "Manage you data."
 ---
 
-# Data Management
 The `force:data:tree` is a great tool if you want to export/import records
 that can be queried using a single query.
 This command is often not sufficient 

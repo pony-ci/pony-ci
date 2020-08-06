@@ -4,7 +4,6 @@ title: "Packages"
 description: "Export and install first-gen packages."
 ---
 
-# Packages
 Pony currently handles installation of first-gen packages.
 
 You can find first-gen packages in the file `data/groups/packages.json`.

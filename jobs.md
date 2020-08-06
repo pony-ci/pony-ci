@@ -4,7 +4,6 @@ title: "Jobs"
 description: "Define and run jobs."
 ---
 
-# Jobs
 Job is a collection of steps.
 You can define your own job which can be executed from another job or using `sfdx pony:run`.
 Standard job extensions are prefixed with `pony`, e.g. `pony:preOrgCreate` and `pony:postSourcePush`,

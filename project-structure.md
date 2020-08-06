@@ -4,7 +4,6 @@ title: "Project Structure"
 description: "See how Pony project looks like."
 ---
 
-# Project Structure
 The core config file for pony projects is `.pony/config.yml`.
 This file includes job definitions, source replacements and data export/import configuration.
 Directories `data/` and `scripts/` contains files essential for 

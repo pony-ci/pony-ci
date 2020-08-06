@@ -4,7 +4,6 @@ title: "Pony CI Docs"
 description: "Automate you sfdx app lifecycle."
 ---
 
-# Pony Project
 Define jobs to automate your Salesforce development experience.
 Simplify scratch org creation,
 manage data export/import 
