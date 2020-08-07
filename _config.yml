@@ -1,0 +1,26 @@
+theme: jekyll-theme-cayman
+
+lang: "en-US"
+encoding: UTF-8
+title: "Pony CI"
+
+url: "https://github.com/pony-ci-docs"
+docs_url: "https://pony-ci.github.io/pony-ci-docs/"
+
+github:
+    repository_url: https://github.com/pony-ci/sfdx-plugin
+
+exclude: ['README.md']
+
+# Set the default `highlighter` mechanism to `Rouge`
+highlighter: rouge
+#
+# Set the default `markdown` engine to `Kramdown`
+markdown: kramdown
+#
+# Set the properties for `Kramdown`
+kramdown:
+    input: GFM
+    syntax_highlighter: rouge
+    math_engine: mathjax
+    hard_wrap: false
