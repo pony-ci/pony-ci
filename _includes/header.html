@@ -5,6 +5,8 @@
             <a class="page-link" href="{{ site.docs_url }}">Docs</a>
         </nav>
     </section>
+
+
     {% if page.title == site.title %}
     <section class="page-header">
         <h1 class="project-name">{{ page.title | default: site.title | default: site.github.repository_name }}</h1>
